@@ -1,0 +1,23 @@
+name: Get changed folders
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  get-changed-folders:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Get changed folders
+      id: changed_folders
+      run: |
+        folders=$(git diff --name-only HEAD~1 HEAD | xargs -I{} dirname {} | sort -u)
+        echo "::set-output name=folders::$folders"
+      
+    - name: Use the output
+      run: echo "The following folders have been changed: ${{ steps.changed_folders.outputs.folders }}"
