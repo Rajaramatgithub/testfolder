@@ -20,4 +20,6 @@ jobs:
         echo "::set-output name=folders::$folders"
       
     - name: Use the output
-      run: echo "The following folders have been changed: ${{ steps.changed_folders.outputs.folders }}"
+      run: |
+        echo "The following folders have been changed:"
+        echo "${{ steps.changed_folders.outputs.folders }}"
