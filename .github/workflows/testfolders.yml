@@ -17,7 +17,7 @@ jobs:
       id: get_changed
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
-        ignore: ".github"
+        ignore: ".github/*"
         foldersOnly: false 
         format: json # either json, csv or newline
     - name: Echo
