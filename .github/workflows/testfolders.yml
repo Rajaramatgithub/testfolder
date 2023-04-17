@@ -23,7 +23,10 @@ jobs:
     - name: Echo
       run: |
           for val in $(echo '${{ steps.get_changed.outputs.changed }}' | jq -r '.[]'); do
-            echo "Value: $val"
+            echo "Value before: $val"
+            if [[ "$val" == dbt/core* ]]; then
+              echo "Value after: $val"
+            fi
           done
       # run: echo ${{ steps.get_changed.outputs.changed }}
 #       $PROJECT_DIR = dbt/core/
