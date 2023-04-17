@@ -33,7 +33,7 @@ jobs:
           for val in "${unique_values[@]}"; do
             echo "Running dbt commands for: $val"
             PROJECT_DIR="dbt/core/"
-            SELECT="dbt run -s tag:aeropostale"
+            SELECT="dbt run -s tag:$val"
             echo "dbt deps --project-dir $PROJECT_DIR"
             echo "dbt build --profiles-dir . --project-dir $PROJECT_DIR --select $SELECT"
           done
