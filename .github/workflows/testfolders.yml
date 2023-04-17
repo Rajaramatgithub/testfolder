@@ -25,7 +25,7 @@ jobs:
           for val in $(echo '${{ steps.get_changed.outputs.changed }}' | jq -r '.[]'); do
             echo "Value before: $val"
             if [[ "$val" == dbt/core* ]]; then
-              echo "Value after: $val"
+              echo "Value: ${val#dbt/core/}"
             fi
           done
       # run: echo ${{ steps.get_changed.outputs.changed }}
