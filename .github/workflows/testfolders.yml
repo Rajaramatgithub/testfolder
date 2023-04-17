@@ -24,37 +24,12 @@ jobs:
       run: |
           values=()
           for val in $(echo '${{ steps.get_changed.outputs.changed }}' | jq -r '.[]'); do
-            echo "Value before: $val"
             if [[ "$val" == dbt/core* ]]; then
               value=${val#dbt/core/}
               values+=(${value%%/*})
             fi
           done
           unique_values=($(echo "${values[@]}" | tr ' ' '\n' | sort -u | tr '\n' ' '))
-          echo "Unique Values: ${unique_values[@]}"
           for val in "${unique_values[@]}"; do
             echo "Unique Value: $val"
           done
-    # - name: Final unique iterations
-    #   run: |
-    #     for val in "${unique_values[@]}"; do
-    #       echo "Unique Value: $val"
-    #     done
-      # run: echo ${{ steps.get_changed.outputs.changed }}
-#       $PROJECT_DIR = dbt/core/
-# $SELECT = dbt run -s tag:aeropostale
-# dbt deps --project-dir $PROJECT_DIR 
-# dbt build --profiles-dir . --project-dir $PROJECT_DIR --select $SELECT
-    # - name: Checkout code
-    #   uses: actions/checkout@v2
-
-    # - name: Get changed folders
-    #   id: changed_folders
-    #   run: |
-    #     folders=$(git diff --name-only HEAD~1 HEAD | xargs -I{} dirname {} | sort -u)
-    #     echo "::set-output name=folders::$folders"
-      
-    # - name: Use the output
-    #   run: |
-    #     echo "The following folders have been changed:"
-    #     echo "${{ steps.changed_folders.outputs.folders }}"
