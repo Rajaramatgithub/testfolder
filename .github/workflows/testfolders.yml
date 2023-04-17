@@ -32,4 +32,14 @@ jobs:
           unique_values=($(echo "${values[@]}" | tr ' ' '\n' | sort -u | tr '\n' ' '))
           for val in "${unique_values[@]}"; do
             echo "Unique Value: $val"
+            $PROJECT_DIR = dbt/core/
+            echo "$SELECT = dbt run -s tag:aeropostale"
+            echo "dbt deps --project-dir $PROJECT_DIR "
+            echo "dbt build --profiles-dir . --project-dir $PROJECT_DIR --select $SELECT"
           done
+
+
+#       $PROJECT_DIR = dbt/core/
+# $SELECT = dbt run -s tag:aeropostale
+# dbt deps --project-dir $PROJECT_DIR 
+# dbt build --profiles-dir . --project-dir $PROJECT_DIR --select $SELECT
