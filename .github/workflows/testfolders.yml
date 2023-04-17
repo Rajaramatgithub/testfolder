@@ -32,11 +32,14 @@ jobs:
           done
           unique_values=($(echo "${values[@]}" | tr ' ' '\n' | sort -u | tr '\n' ' '))
           echo "Unique Values: ${unique_values[@]}"
-    - name: Final unique iterations
-      run: |
-        for val in "${unique_values[@]}"; do
-          echo "Unique Value: $val"
-        done
+          for val in "${unique_values[@]}"; do
+            echo "Unique Value: $val"
+          done
+    # - name: Final unique iterations
+    #   run: |
+    #     for val in "${unique_values[@]}"; do
+    #       echo "Unique Value: $val"
+    #     done
       # run: echo ${{ steps.get_changed.outputs.changed }}
 #       $PROJECT_DIR = dbt/core/
 # $SELECT = dbt run -s tag:aeropostale
