@@ -24,15 +24,15 @@ jobs:
       run: |
           values=()
           for val in $(echo '${{ steps.get_changed.outputs.changed }}' | jq -r '.[]'); do
-            if [[ "$val" == dbt/core* ]]; then
-              value=${val#dbt/core/}
+            if [[ "$val" == core/models* ]]; then
+              value=${val#core/models/}
               values+=(${value%%/*})
             fi
           done
           unique_values=($(echo "${values[@]}" | tr ' ' '\n' | sort -u | tr '\n' ' '))
           for val in "${unique_values[@]}"; do
             echo "Running dbt commands for: $val"
-            PROJECT_DIR="dbt/core/"
+            PROJECT_DIR="core/models/"
             SELECT="dbt run -s tag:$val"
             echo "dbt deps --project-dir $PROJECT_DIR"
             echo "dbt build --profiles-dir . --project-dir $PROJECT_DIR --select $SELECT"
